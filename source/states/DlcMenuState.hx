@@ -230,7 +230,7 @@ class DlcMenuState extends MusicBeatState
 		DlcHttp.request(); // you gotta be kidding
 		DlcStoreHttp.request();
 		#if !EXPERIMENTAL_FEATURES
-		#if windows
+		#if WEB_ENABLED
 		Thread.createWithEventLoop(() ->
 		{
 			var Viewer:WebView = new WebView(#if debug true #end);

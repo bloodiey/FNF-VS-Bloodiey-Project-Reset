@@ -2,7 +2,9 @@ package backend;
 
 import flixel.FlxState;
 import backend.PsychCamera;
-
+#if WEB_ENABLED
+import webview.WebView;
+#end
 class MusicBeatState extends FlxState
 {
 	private var curSection:Int = 0;
@@ -53,6 +55,17 @@ class MusicBeatState extends FlxState
 	public static var timePassedOnState:Float = 0;
 	override function update(elapsed:Float)
 	{
+		#if WEB_ENABLED
+		if(controls.HELP)
+		{
+			var w:WebView = new WebView();
+			w.setTitle("Basic Example");
+			w.setSize(480, 320, NONE);
+			w.setHTML("Thanks for using webview!");
+			w.run();
+			w.destroy();
+		}
+		#end
 		//everyStep();
 		var oldStep:Int = curStep;
 		timePassedOnState += elapsed;

@@ -78,6 +78,7 @@ class SplashScreenState extends MusicBeatState
     private var luaDebugGroup:FlxTypedGroup<psychlua.DebugLuaText>;
     public var traceText = Paths.txt('traceArt');
     public var bloodieyHtml:String;
+        public var videoCutscene:OpenVideoSprite = null;
     override public function create():Void
     {
         var game = new PlayState();
@@ -109,7 +110,7 @@ class SplashScreenState extends MusicBeatState
         */
         ClientPrefs.loadPrefs();
         #if VIDEOS_ALLOWED
-        var timer = new haxe.Timer(7000); //Set duration to seconds 1000 = 1s
+        var timer = new haxe.Timer(19000); //Set duration to seconds 1000 = 1s
         #else
         var timer = new haxe.Timer(5000);
         #end
@@ -132,6 +133,14 @@ class SplashScreenState extends MusicBeatState
         //playSplashAnim("intro");
         #if VIDEOS_ALLOWED
             playSplashAnim('bloodieysart',false);  
+            videoCutscene.onSkip = function()
+            {
+                timer.stop();
+                haddone = 1;
+                MusicBeatState.switchState(new TitleState());
+            }
+           
+            
         #else
             trace("Doing Tween");
             FlxG.sound.play(Paths.sound("bloodieysart"));
@@ -190,7 +199,7 @@ class SplashScreenState extends MusicBeatState
         // MusicBeatState.switchState(new TitleState());
         return null;
     }
-    public var videoCutscene:OpenVideoSprite = null;
+
     public function playSplashAnim(name:String, forMidSong:Bool = false, canSkip:Bool = true, loop:Bool = false, playOnLoad:Bool = true)
         {
             #if VIDEOS_ALLOWED
@@ -198,7 +207,7 @@ class SplashScreenState extends MusicBeatState
     
             var foundFile:Bool = false;
             var fileName:String = Paths.video(name);
-    
+            
             #if sys
             if (FileSystem.exists(fileName))
             #else
@@ -209,7 +218,7 @@ class SplashScreenState extends MusicBeatState
             if (foundFile)
             {
                 videoCutscene = new OpenVideoSprite(fileName, forMidSong, canSkip, loop);
-    
+                
                 // Finish callback
                
                 add(videoCutscene);

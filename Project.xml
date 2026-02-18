@@ -27,6 +27,7 @@
 	<define name="DISCORD_ALLOWED" />
 	<define name="TRANSLATIONS_ALLOWED" />
 	<define name="IRIS_DEBUG"/>
+	<define name="WEB_ENABLED" if="windows"/>
 	
 	<define name="MULTITHREADED_LOADING" /> <!-- UNCOMMENTING THIS LINE WILL ENABLE MULTITHREADED LOADING, WHICH IMPROVES LOADING TIMES, BUT APPARENTLY CAN FREEZE THE GAME ON SONG LOAD IN OLDER PCs? -->
 	<define name="SHOW_LOADING_SCREEN" />
@@ -131,7 +132,7 @@
 	<haxelib name="format" />
 	<haxelib name="hxcpp" if="desktop"/>
 	<haxelib name="http-socket" if="desktop"/>
-	<haxelib name="HxWebView" if="desktop"/>
+	<haxelib name="HxWebView" if="WEB_ENABLED"/>
 	<haxelib name="zip" if="desktop"/>
 	<haxedeg name ="WEB_DLC_PORTAL" if="webdlc"/>
 	
@@ -199,10 +200,8 @@
 	
 	<icon path="icon/icon16.png" size='16'/>
 	<icon path="icon/icon32.png" size='32'/>
-	<icon path="icon/icon64.png" size='64'/>
-	<icon path="icon/icon128.png" size='128'/>
-	<icon path="icon/iconOG.png" />
-
+	<icon path="icon/iconOG-alt.svg" />
+	
 
 
 </project>
